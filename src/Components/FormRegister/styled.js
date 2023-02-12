@@ -17,6 +17,11 @@ button{
    align-items: center;
    border: none;
 }
+
+button:hover{
+   background-color: var(--primary-color-focus);
+   transition: 0.3s;
+}
 @media screen and (min-width:769px) {
    width: 90%;
 

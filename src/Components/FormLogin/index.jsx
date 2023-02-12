@@ -52,6 +52,7 @@ export const FormLogin = () => {
             type="text" 
             label="Email"  
             erro={errors.email?.message} 
+            placeholder="Digite aqui seu Email"
             {...register("email")}
             />
 
@@ -59,6 +60,7 @@ export const FormLogin = () => {
                <Input 
                type={inputType} 
                label= "Senha"  
+               placeholder="Digite aqui a sua senha "
                erro={errors.password?.message} 
                {...register("password")}
                />

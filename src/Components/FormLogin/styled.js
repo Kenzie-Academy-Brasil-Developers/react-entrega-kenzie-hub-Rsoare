@@ -22,6 +22,11 @@ export const FormStyled = styled.form`
       align-items: center;
       font-size: 1rem;
    }
+
+   button:hover{
+      background-color: var(--primary-color-focus);
+      transition: 0.3s;
+   }
    div{
       position: relative;
       width: 100%;

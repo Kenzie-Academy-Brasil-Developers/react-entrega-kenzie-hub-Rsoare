@@ -39,6 +39,10 @@ export const MainContainer= styled.div`
       justify-content: center;
       align-items: center;
    }
+   a:hover{
+      background-color: var(--grey-200);
+      transition: 0.3s;
+   }
 
    @media screen and (min-width:769px) {
       main{
