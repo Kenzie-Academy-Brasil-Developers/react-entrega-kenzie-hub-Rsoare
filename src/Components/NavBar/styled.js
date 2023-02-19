@@ -23,6 +23,7 @@ a{
    align-items: center;
    justify-content: center;
 }
+
 a:hover{
    background-color: var(--grey-300);
    transition: 0.3s;

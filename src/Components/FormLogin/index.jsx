@@ -1,9 +1,8 @@
-import {useNavigate,Input,api,useForm,yupResolver,toast,loginSchema,useState} from "./imports"
+import {Input,useForm,yupResolver,loginSchema,useState, UserContexts,useContext} from "./imports"
 import {FormStyled} from "./styled"
 import icon from "../../assets/icon.svg"
 export const FormLogin = () => {
-
-   const navegate = useNavigate()
+   const {userLoginContext} = useContext(UserContexts)
 
    const [inputType,setInputType] = useState("password")
 
@@ -22,31 +21,10 @@ export const FormLogin = () => {
       handleSubmit, 
       formState : {errors}} = useForm({resolver:yupResolver(loginSchema)})
 
-   const userLogin = async (data) => {
-
-      try {
-         const response = await api.post("sessions",data)
-
-         const responseUser = response.data
-         
-         window.localStorage.clear()
-
-         localStorage.setItem("@kenzieHub:dataLogin",JSON.stringify(responseUser))
-         
-         navegate("/Home")
-
-         toast.success("Bem vindo(a)!")
-         
-      } catch(error) {
-         console.error(error)
-         toast.error("Email ou senha inválidos")
-      }
-
-   }
 
    return (
       <>
-         <FormStyled  onSubmit={handleSubmit(userLogin)}>
+         <FormStyled  onSubmit={handleSubmit(userLoginContext)}>
 
             <Input 
             type="text" 
@@ -70,7 +48,6 @@ export const FormLogin = () => {
             <button type="submin">Entrar</button>
 
          </FormStyled>
-
       </>
    )
 }

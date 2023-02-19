@@ -1,26 +1,42 @@
 import {NavBar} from "../../Components/NavBar"
-import {MainStyled,HeaderStyled,TraceStyled } from "./styled"
-export const HomePage = () => {
+import {MainStyled,HeaderStyled,TraceStyled,ModalContainer } from "./styled"
+import { UserContexts } from "../../context/UserContext"
+import { useContext,useState } from "react"
+import { TechsList } from "../../Components/techsList"
+import { FormAddTechs } from "../../Components/FormAddTechs"
 
-   const dataUser = JSON.parse(localStorage.getItem("@kenzieHub:dataLogin")) || {}
-   const {name,course_module} = dataUser.user 
+export const HomePage = () => {
+   const [modalOpem,setModalOpem] = useState(false)
+   const {user} = useContext(UserContexts)
    
    return (
-      <>
-      <NavBar/>
 
+      <>
+         <NavBar/>
             <TraceStyled >
                <HeaderStyled>
-                  <h1 className="Title one">Olá, {name} </h1>
-                  <p className="Title colorGrey1">{course_module}</p>
+                  <h1 className="Title one">Olá,{user && user.name} </h1>
+                  <p className="Title colorGrey1">{user && user.course_module}</p>
                </HeaderStyled>
             </TraceStyled>
 
-      
-         <MainStyled>
-            <h2 className="Title one" >Que pena! Estamos em desenvolvimento :(</h2>
-            <p className="Title two">Nossa aplicação está em desenvolvimento, em breve teremos novidades</p>
-         </MainStyled>
-   </>
+         
+            <MainStyled>
+               
+               <div className="main__title--container ">
+                  <h2 className="Title one" >Tecnologias</h2>
+                  <button type="button" onClick={() => setModalOpem(!modalOpem)}>+</button>
+               </div> 
+
+               <TechsList/>
+
+            </MainStyled>
+            
+            <ModalContainer> 
+               
+               {modalOpem && <FormAddTechs setModalOpem = {setModalOpem} modalOpem ={modalOpem} />}
+
+            </ModalContainer>
+      </>
    )
 }

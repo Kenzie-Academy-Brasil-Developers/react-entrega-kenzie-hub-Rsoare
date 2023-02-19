@@ -21,6 +21,12 @@ export const GlobalTypography = createGlobalStyle`
    color: var(--grey-0);
 }
 
+.Title.three{
+   font-size: 1rem;
+   font-weight: 700;
+   color: var(--grey-0);
+}
+
 .Title.colorPrimary{
    font-size: 1rem;
    font-weight: 700;

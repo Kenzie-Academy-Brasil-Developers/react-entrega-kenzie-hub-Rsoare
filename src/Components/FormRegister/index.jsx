@@ -1,35 +1,19 @@
-import  {useForm,yupResolver,api,registerSchema ,Select,Input,toast,useNavigate} from "./imports"
+import  {useForm,yupResolver,registerSchema ,Select,Input,UserContexts,useContext} from "./imports"
 import {FormStyled} from "./styled"
 
 export const FormRegister = () => {
 
-      const {register,
-            handleSubmit, 
-            formState : {errors}} = useForm({resolver:yupResolver(registerSchema)})
 
-      const navigate = useNavigate()
+   const {registerUserContext} = useContext(UserContexts)
 
-      const registerUser = async (data) =>{
-         
-      try{
+   const {register,
+      handleSubmit, 
+      formState : {errors}} = useForm({resolver:yupResolver(registerSchema)})
 
-         const response = await api.post("users",data)
-         toast.success("Usuario criado com sucesso")
-
-         navigate("/")
-
-      } catch (error){
-         
-         console.error(error)
-         error.response.status == 401 ? (toast.error("Email ja cadastrado!"))
-         :(toast.error("Erro inesperado ao realizar o cadastro"))
-      }
-
-   }
 
    return (
       
-         <FormStyled onSubmit={handleSubmit(registerUser)}>
+         <FormStyled onSubmit={handleSubmit(registerUserContext)}>
             <Input 
             label="Nome:" 
             id="name" 
@@ -61,7 +45,7 @@ export const FormRegister = () => {
             <Input 
             label="Confirmar Senha :" 
             id="confirmationPassword" 
-            type="text" 
+            type="password" 
             placeholder="Digite novamente sua senha"
             erro={errors.confirmationPassword?.message} 
             {...register("confirmationPassword")}
